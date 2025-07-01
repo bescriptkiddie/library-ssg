@@ -39,7 +39,7 @@ pnpm dev
 ## 📁 项目结构
 
 ```
-scys-ssg/
+library-ssg/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── api/               # API路由
