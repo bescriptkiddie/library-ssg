@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+/* 全局样式变量 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-paper: #f9f6f1;
+  --text-main: #3d3d3d;
+  --text-heading: #1a1a1a;
+  --accent-primary: #4a6f92;
+  --accent-secondary: #eaddc7;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --background: #f9f6f1;
+  --foreground: #3d3d3d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-noto-sans);
+  --font-serif: var(--font-noto-serif);
+
+  /* 自定义颜色类 */
+  --color-paper: #f9f6f1;
+  --color-main: #3d3d3d;
+  --color-heading: #1a1a1a;
+  --color-primary: #4a6f92;
+  --color-secondary: #eaddc7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 字体样式 */
+.font-serif {
+  font-family: var(--font-noto-serif);
+}
+
+.font-sans {
+  font-family: var(--font-noto-sans);
+}
+
+/* 文章内容样式 */
+.prose {
+  max-width: none;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--text-heading);
+  font-family: var(--font-noto-serif);
+  font-weight: 700;
+}
+
+.prose p,
+.prose li,
+.prose blockquote {
+  color: var(--text-main);
+  line-height: 1.8;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--accent-primary);
+  background-color: var(--accent-secondary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.prose code {
+  background-color: var(--accent-secondary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose pre {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a5a7a;
+}
+
+/* 自定义工具类 */
+.bg-paper {
+  background-color: var(--bg-paper);
+}
+
+.text-main {
+  color: var(--text-main);
+}
+
+.text-heading {
+  color: var(--text-heading);
+}
+
+.text-primary {
+  color: var(--accent-primary);
+}
+
+.bg-secondary {
+  background-color: var(--accent-secondary);
+}
+
+.font-sans {
+  font-family: var(--font-noto-sans);
+}
+
+.font-serif {
+  font-family: var(--font-noto-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-sans);
 }

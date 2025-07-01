@@ -1,103 +1,93 @@
-import Image from "next/image";
+import { getAllNotes } from '@/lib/notes'
 
-export default function Home() {
+export default async function Home() {
+  const notes = await getAllNotes()
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="container mx-auto px-4 py-16 sm:py-24">
+      <header className="text-center mb-12 sm:mb-20">
+        <h1
+          className="text-4xl sm:text-5xl font-bold"
+          style={{
+            color: '#1a1a1a',
+            fontFamily: 'var(--font-noto-serif)'
+          }}
+        >
+          智慧殿堂
+        </h1>
+        <p className="mt-4 text-lg" style={{ color: '#3d3d3d' }}>
+          精选思考，深度阅读
+        </p>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {notes.map((note) => (
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            key={note.id}
+            href={`/api/notes/${note.id}/html`}
+            className="block bg-white p-8 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-transparent hover:border-gray-200"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            <p className="text-sm font-bold" style={{ color: '#4a6f92' }}>
+              {note.author}
+            </p>
+            <h3
+              className="text-xl font-bold mt-2"
+              style={{
+                color: '#1a1a1a',
+                fontFamily: 'var(--font-noto-serif)'
+              }}
+            >
+              {note.title}
+            </h3>
+            <p
+              className="text-base mt-4 leading-relaxed"
+              style={{ color: '#3d3d3d' }}
+            >
+              {note.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {note.tags.slice(0, 3).map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2 py-1 text-xs rounded-full"
+                  style={{
+                    backgroundColor: '#eaddc7',
+                    color: '#3d3d3d'
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div
+              className="text-sm font-bold mt-6 flex items-center group-hover:underline"
+              style={{ color: '#4a6f92' }}
+            >
+              <span>开始阅读</span>
+              <svg
+                className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        ))}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer
+        className="text-center mt-20 text-sm"
+        style={{ color: '#3d3d3d' }}
+      >
+        <p>&copy; 2025 智慧殿堂. All Rights Reserved.</p>
       </footer>
     </div>
-  );
+  )
 }
