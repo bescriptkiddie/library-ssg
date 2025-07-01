@@ -1,0 +1,49 @@
+{
+  "notes": [
+    {
+      "id": "sample-note-1",
+      "title": "《深度学习》读书笔记",
+      "bookTitle": "深度学习",
+      "author": "Ian Goodfellow",
+      "description": "这是一本关于深度学习基础理论和实践的经典教材的读书笔记。涵盖了神经网络、反向传播、卷积神经网络等核心概念。",
+      "tags": ["深度学习", "机器学习", "人工智能", "神经网络"],
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-01-15T10:30:00Z",
+      "htmlFileName": "deep-learning-notes.html",
+      "coverImage": "deep-learning-cover.jpg",
+      "readingProgress": 85,
+      "rating": 5,
+      "category": "技术"
+    },
+    {
+      "id": "sample-note-2",
+      "title": "《人类简史》思考笔记",
+      "bookTitle": "人类简史：从动物到上帝",
+      "author": "尤瓦尔·赫拉利",
+      "description": "对人类文明发展历程的深度思考，从认知革命到农业革命再到科学革命，探讨人类社会的演进逻辑。",
+      "tags": ["历史", "人类学", "社会学", "哲学"],
+      "createdAt": "2024-01-10T14:20:00Z",
+      "updatedAt": "2024-01-12T16:45:00Z",
+      "htmlFileName": "sapiens-notes.html",
+      "coverImage": "sapiens-cover.jpg",
+      "readingProgress": 100,
+      "rating": 4,
+      "category": "人文"
+    },
+    {
+      "id": "sample-note-3",
+      "title": "《原则》实践总结",
+      "bookTitle": "原则",
+      "author": "瑞·达利欧",
+      "description": "桥水基金创始人达利欧的人生和工作原则总结，包含了大量实用的决策框架和管理理念。",
+      "tags": ["管理", "投资", "决策", "原则"],
+      "createdAt": "2024-01-05T09:15:00Z",
+      "updatedAt": "2024-01-08T11:30:00Z",
+      "htmlFileName": "principles-notes.html",
+      "coverImage": "principles-cover.jpg",
+      "readingProgress": 70,
+      "rating": 4,
+      "category": "商业"
+    }
+  ]
+}

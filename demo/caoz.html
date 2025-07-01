@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事 | 每一步都算数</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      /* ------------------------------ */
+      /* 1. 全局设计规范 (Global Design System) */
+      /* ------------------------------ */
+      :root {
+        --bg-paper: #f9f6f1; /* 温暖的纸张背景色 */
+        --text-main: #3d3d3d; /* 主要文本，非纯黑，更柔和 */
+        --text-heading: #1a1a1a; /* 标题文本 */
+        --accent-primary: #a16207; /* 沉稳、温暖的金色/棕色 */
+        --accent-secondary: #eaddc7; /* 温暖的米色，用于高亮背景 */
+        --border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: "Noto Sans SC", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* ------------------------------ */
+      /* 2. 排版 (Typography) */
+      /* ------------------------------ */
+      h1,
+      h2,
+      h3 {
+        font-family: "Noto Serif SC", serif;
+        color: var(--text-heading);
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* ------------------------------ */
+      /* 3. 组件样式 (Component Styles) */
+      /* ------------------------------ */
+
+      /* 注解卡片 (Annotation Card) */
+      .annotation-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        will-change: opacity, transform;
+      }
+      .annotation-card.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* 策略支柱 (Strategy Pillar) */
+      .strategy-pillar {
+        border-left: 4px solid transparent;
+        transition: background-color 0.4s ease, border-left-color 0.4s ease;
+      }
+      .strategy-pillar.is-active {
+        background-color: white;
+        border-left-color: var(--accent-primary);
+      }
+
+      /* 核心原则 (Core Principle) */
+      .core-principle {
+        background-color: var(--accent-secondary);
+        font-family: "Noto Serif SC", serif;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- 返回按钮 -->
+    <a
+      href="index.html"
+      title="返回智慧殿堂"
+      class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300"
+    >
+      <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- 页眉：文章标题 -->
+      <header class="py-16 md:py-24 text-center max-w-4xl mx-auto">
+        <p class="text-lg md:text-xl text-gray-600 mb-4">@Caoz</p>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+          data-annotate="note-intro"
+        >
+          每一步都算数
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600">
+          长期主义者的赚钱之道
+        </p>
+      </header>
+
+      <!-- 主体内容：双栏布局 -->
+      <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <!-- 左侧：文章正文 -->
+        <article class="lg:col-span-7">
+          <div class="prose prose-lg max-w-none text-justify">
+            <p data-annotate="note-1" class="text-lg">
+              我坦白说，我最近几年赚到的几乎所有钱，都可以溯源于很早之前的决策和行动，短则七八年，长则二十年。而且彼时，我是没有办法判断这后面的变现路径的。这期间我踩过很多坑，有过很多教训，但有些事我从未怀疑和动摇，比如持续分享，比如坚持利他的价值观。
+            </p>
+
+            <h2
+              class="text-3xl font-semibold mt-16 mb-8"
+              data-annotate="note-2"
+            >
+              赚钱之道的三步法
+            </h2>
+            <p>我是怎么赚钱的，复盘一下：</p>
+
+            <!-- 策略支柱 1 -->
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-3"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    第一步：深耕行业，积累认知
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    其一，我在互联网巨头、创业公司都做过，自己还创业过不止一次，有足够的行业认知，业内实操经验丰富。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 策略支柱 2 -->
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-4"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    第二步：乐于分享，建立影响
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    其二，我乐于分享。由于我实操经验丰富，所以我的分享价值也足够高。长期分享让我建立了影响力，认识了很多行业精英。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 策略支柱 3 -->
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-5"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-people-group"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    第三步：坚持利他，构建链接
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    其三，我乐于助人。有些其实真不是那种举手之劳，非常贴心，非常耐心地帮助人，这个真没有，但是举手之劳，帮助那些有前途的年轻人，以及搭建人脉链接，这种利他行为我确实一直在做。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h2
+              class="text-3xl font-semibold mt-16 mb-8"
+              data-annotate="note-6"
+            >
+              最重要的能力
+            </h2>
+            <p data-annotate="note-7">
+              我觉得有一种一祥是最重要的、所谓对需求的洞察力。这个话讲起来太大了，同理心，好奇心，对身边事物的敏锐度。我之所以说很多成功的创业者，他们是极度敏感的，到机场贵宾厅候机的时候，会看着电脑默认首页是哪个网址导航，上面的链接有没有自己的网站，或是竞品的，在高端饭局里，还会问小妹妹手机里装什么
+              App。
+            </p>
+
+            <!-- 核心原则模块 -->
+            <div
+              class="core-principle my-12 p-8 text-center rounded-lg shadow-sm"
+              data-annotate="note-8"
+            >
+              <h3
+                class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0"
+              >
+                “别着急，耐得住，才能真正赢得住。回到最开始那句话：每一步，都算数。”
+              </h3>
+            </div>
+          </div>
+        </article>
+
+        <!-- 右侧：注解面板 -->
+        <aside class="hidden lg:block lg:col-span-5">
+          <div id="annotation-panel" class="sticky top-24 space-y-8">
+            <div
+              id="note-intro"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记
+              </h4>
+              <p class="mt-2 text-sm">
+                本文是作者“Caoz”对其个人财富积累路径的一次深度复盘。其核心不在于具体的投资技巧，而在于一套基于长期主义、价值积累和利他主义的世界观和方法论。
+              </p>
+            </div>
+
+            <div
+              id="note-1"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：价值的滞后兑现
+              </h4>
+              <p class="mt-2 text-sm">
+                作者开篇即道出长期主义的本质：当下的收获，是过去种下的因。这个“因”在当时往往无法预见其“果”。这要求行动者具备超越短期利益的战略耐心和对自身价值观的坚定信念。
+              </p>
+            </div>
+
+            <div
+              id="note-2"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略框架：价值创造飞轮
+              </h4>
+              <p class="mt-2 text-sm">
+                作者提出的“三步法”并非孤立的步骤，而是一个可以持续转动的“价值飞轮”。认知是燃料，分享是放大器，利他是润滑剂。飞轮一旦转动起来，便会产生强大的势能和复利效应。
+              </p>
+            </div>
+
+            <div
+              id="note-3"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则一：构建认知护城河
+              </h4>
+              <p class="mt-2 text-sm">
+                “深耕行业”是构建一切价值的基础。没有基于深度实践的独到认知，任何分享都会流于表面，任何利他都可能缺乏真正的效用。这是能力圈的源头，也是个人品牌最坚实的基座。
+              </p>
+            </div>
+
+            <div
+              id="note-4"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则二：用分享放大价值
+              </h4>
+              <p class="mt-2 text-sm">
+                分享是将个人的“认知资本”转化为“影响力资本”的关键一步。它不仅能帮助他人，更能通过输出倒逼输入，加深自己的思考。更重要的是，它能让潜在的合作者和机会主动找上门来。
+              </p>
+            </div>
+
+            <div
+              id="note-5"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则三：用利他编织网络
+              </h4>
+              <p class="mt-2 text-sm">
+                利他是建立高质量社会资本的最高效策略。它超越了简单的利益交换，建立起基于信任和情感的深度链接。这个网络会在关键时刻，提供信息、资源和机会，其价值难以估量。
+              </p>
+            </div>
+
+            <div
+              id="note-6"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                元能力：驱动飞轮的引擎
+              </h4>
+              <p class="mt-2 text-sm">
+                在“三步法”这个操作系统的上层，作者指出了一个更底层的驱动力——对世界的好奇心和敏锐的洞察力。这是所有价值创造的起点，是发现“深耕”方向、找到“分享”内容、识别“利他”对象的源头活水。
+              </p>
+            </div>
+
+            <div
+              id="note-7"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：于无声处听惊雷
+              </h4>
+              <p class="mt-2 text-sm">
+                作者所说的“洞察力”，本质上是一种在日常细节中发现商业模式和用户需求的能力。它要求从业者跳出自己的信息茧房，像人类学家一样观察世界。这种能力，是顶尖产品经理和投资人共同的特质。
+              </p>
+            </div>
+
+            <div
+              id="note-8"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑总结：回归本心
+              </h4>
+              <p class="mt-2 text-sm">
+                文章最终回归到一种心态：“别着急”。在深刻理解了价值创造的规律后，内心会变得笃定，不再为短期的波动而焦虑。因为你知道，只要走在正确的路上，做的每一件有积累的事，时间最终都会给予回报。
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <!-- 页脚 -->
+      <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Scrollytelling Demo. Content by Caoz.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ------------------------------------------ //
+        // 1. GSAP 插件注册
+        // ------------------------------------------ //
+        gsap.registerPlugin(ScrollTrigger)
+
+        // ------------------------------------------ //
+        // 2. 注解卡片同步滚动逻辑
+        // ------------------------------------------ //
+        const annotationCards = document.querySelectorAll(".annotation-card")
+        const annotatedParas = document.querySelectorAll("[data-annotate]")
+
+        annotatedParas.forEach((para) => {
+          const noteId = para.dataset.annotate
+          const targetNote = document.getElementById(noteId)
+
+          if (!targetNote) return
+
+          ScrollTrigger.create({
+            trigger: para,
+            start: "top 30%", // 当段落顶部到达视口30%位置时
+            end: "bottom 30%", // 当段落底部离开视口30%位置时
+            onEnter: () => {
+              // 激活对应的注解卡片
+              annotationCards.forEach((card) => card.classList.remove("active"))
+              targetNote.classList.add("active")
+            },
+            onEnterBack: () => {
+              // 向上滚动时，重新激活
+              annotationCards.forEach((card) => card.classList.remove("active"))
+              targetNote.classList.add("active")
+            }
+          })
+        })
+
+        // 默认激活第一张卡片
+        const firstCard = document.querySelector(".annotation-card")
+        if (firstCard) {
+          // 使用一个小的延迟确保所有内容加载完毕
+          setTimeout(() => {
+            firstCard.classList.add("active")
+          }, 300)
+        }
+
+        // ------------------------------------------ //
+        // 3. 策略支柱高亮逻辑
+        // ------------------------------------------ //
+        const pillars = gsap.utils.toArray(".strategy-pillar")
+        pillars.forEach((pillar) => {
+          ScrollTrigger.create({
+            trigger: pillar,
+            start: "top center",
+            end: "bottom center",
+            toggleClass: "is-active"
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

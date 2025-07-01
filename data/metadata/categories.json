@@ -1,0 +1,46 @@
+{
+  "categories": [
+    {
+      "id": "tech",
+      "name": "技术",
+      "description": "技术、编程、计算机科学相关书籍",
+      "color": "#3B82F6",
+      "count": 0
+    },
+    {
+      "id": "business",
+      "name": "商业",
+      "description": "商业管理、投资理财、创业相关书籍",
+      "color": "#10B981",
+      "count": 0
+    },
+    {
+      "id": "humanities",
+      "name": "人文",
+      "description": "历史、哲学、文学、艺术相关书籍",
+      "color": "#F59E0B",
+      "count": 0
+    },
+    {
+      "id": "science",
+      "name": "科学",
+      "description": "自然科学、数学、物理、生物相关书籍",
+      "color": "#8B5CF6",
+      "count": 0
+    },
+    {
+      "id": "psychology",
+      "name": "心理学",
+      "description": "心理学、认知科学、行为学相关书籍",
+      "color": "#EF4444",
+      "count": 0
+    },
+    {
+      "id": "self-improvement",
+      "name": "自我提升",
+      "description": "个人成长、技能提升、生活方式相关书籍",
+      "color": "#06B6D4",
+      "count": 0
+    }
+  ]
+}
