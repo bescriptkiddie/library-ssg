@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/book
+/gemini-md
 /.pnp
 .pnp.*
 .yarn/*

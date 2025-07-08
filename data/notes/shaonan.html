@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事 | 少楠：一条长坡厚雪的生财之道</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      /* ------------------------------ */
+      /* 1. 全局设计规范 (Global Design System) */
+      /* ------------------------------ */
+      :root {
+        --bg-paper: #f9f6f1; /* 温暖的纸张背景色 */
+        --text-main: #3d3d3d; /* 主要文本，非纯黑，更柔和 */
+        --text-heading: #1a1a1a; /* 标题文本 */
+        --accent-primary: #1d4ed8; /* 沉静、可靠的蓝色 */
+        --accent-secondary: #eaddc7; /* 温暖的米色，用于高亮背景 */
+        --border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: 'Noto Sans SC', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* ------------------------------ */
+      /* 2. 排版 (Typography) */
+      /* ------------------------------ */
+      h1,
+      h2,
+      h3 {
+        font-family: 'Noto Serif SC', serif;
+        color: var(--text-heading);
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* ------------------------------ */
+      /* 3. 组件样式 (Component Styles) */
+      /* ------------------------------ */
+
+      .annotation-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        will-change: opacity, transform;
+      }
+      .annotation-card.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .strategy-pillar {
+        border-left: 4px solid transparent;
+        transition: background-color 0.4s ease, border-left-color 0.4s ease;
+      }
+      .strategy-pillar.is-active {
+        background-color: white;
+        border-left-color: var(--accent-primary);
+      }
+
+      .core-principle {
+        background-color: var(--accent-secondary);
+        font-family: 'Noto Serif SC', serif;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- 返回按钮 -->
+    <a
+      href="index.html"
+      title="返回智慧殿堂"
+      class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300"
+    >
+      <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="py-16 md:py-24 text-center max-w-4xl mx-auto">
+        <p class="text-lg md:text-xl text-gray-600 mb-4">@少楠</p>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+          data-annotate="note-intro"
+        >
+          一条长坡厚雪的生财之道
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600">
+          flomo · 浮墨笔记 联合创始人
+        </p>
+      </header>
+
+      <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <article class="lg:col-span-7">
+          <div class="prose prose-lg max-w-none text-justify">
+            <p data-annotate="note-1" class="text-lg">
+              2020年，在不依靠任何外部融资的情况下，我们选择进入笔记App这个竞争激烈的红海市场。五年后，flomo不仅存活了下来，还为数百万用户保存着数以亿计的笔记。这背后，是一套关于判断、策略、验证和战略选择的完整思考，我们称之为“有术”。
+            </p>
+
+            <h2
+              class="text-3xl font-semibold mt-16 mb-8"
+              data-annotate="note-2"
+            >
+              我们的决策框架：从判断到战略
+            </h2>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-3"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-water"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    判断：为何选择红海市场？
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    我们之所以逆向选择一个看似没有机会的红海市场，是因为我们判断，笔记是已被验证的真实需求，市场规模稳定，且存在结构性机会。对于不打算融资的我们来说，这意味着有生存空间。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-4"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-chess-knight"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    策略：如何找到切入点？
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    我们没有模仿竞品，而是参考《文化战略》的思想，找到了一个独特的文化现象——“卡片笔记法”（Zettelkasten）。我们围绕这个核心理念，将flomo打造成一个功能极简、专注于“快速记录，无压思考”的思想工具，从而实现了差异化定位。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-5"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    验证：如何确认商业价值？
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    产品上线后，我们很快就推出了一个极其粗糙的收费版本。结果用户的付费意愿远超预期。这次验证让我们确认，flomo不仅有人需要，也有人愿意为之付费，具备了商业化的基础。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-6"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-arrows-down-to-line"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    挑战：增长中的反思
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    我们曾一度高歌猛进开发新功能，但发现第二年的续费率才是生死线。许多用户并不会因为付费就去体验所有功能，感知不到价值，自然就不会续费。这个发现让我们警醒，赶紧从追求“新酷功能”转向“夯实基本功”。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="core-principle my-12 p-8 text-center rounded-lg shadow-sm"
+              data-annotate="note-7"
+            >
+              <h3
+                class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0"
+              >
+                战略：长坡厚雪
+              </h3>
+              <p class="!mt-2 !mb-0">
+                关于战略，我们审视自身情况和市场，最终选择了“长坡厚雪”这条不算拥挤的道路。它意味着我们看重长期价值，相信时间复利，只要我们持续为用户创造价值，依靠订阅制就能获得稳定的现金流。正是这种策略和耐心，让我们能完全依靠产品自身的造血能力，一步步稳健成长。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hidden lg:block lg:col-span-5">
+          <div id="annotation-panel" class="sticky top-24 space-y-8">
+            <div
+              id="note-intro"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：小团队的生存哲学
+              </h4>
+              <p class="mt-2 text-sm">
+                本文是flomo联合创始人“少楠”对其产品和商业战略的深度复盘。它探讨了一个核心问题：在巨头林立的市场中，一个小团队如何通过差异化定位和长期主义战略，不仅活下来，而且活得很好。
+              </p>
+            </div>
+
+            <div
+              id="note-1"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：利润是最好的护城河
+              </h4>
+              <p class="mt-2 text-sm">
+                在当今这个追逐融资和规模的时代，flomo反其道而行之，专注于健康的商业模式和内生性增长。一个能自我造血、持续盈利的商业模式，本身就构成了最坚固的护城河，让你拥有了战略的自主权。
+              </p>
+            </div>
+
+            <div
+              id="note-2"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：从定位到增长的反思
+              </h4>
+              <p class="mt-2 text-sm">
+                作者在此处系统性地阐述其创业决策的完整框架。从市场判断、策略选择，到商业验证和后续挑战，构成了一个清晰的逻辑闭环。
+              </p>
+            </div>
+
+            <div
+              id="note-3"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                市场判断：在红海中寻找蓝海
+              </h4>
+              <p class="mt-2 text-sm">
+                选择“红海市场”是一种反直觉但极其聪明的策略。因为红海意味着市场需求和付费意愿都已被验证，免去了教育市场的成本。创业者的任务，不再是创造需求，而是在现有需求中找到一个未被满足的细分场景。
+              </p>
+            </div>
+
+            <div
+              id="note-4"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略洞见：“心智占位”是涌现而非设计的结果
+              </h4>
+              <p class="mt-2 text-sm">
+                这是我们共创的核心洞见。flomo的成功路径揭示了，“心智占位”并非一个在项目启动前就已完美规划的宏大蓝图。它更像是一个在黑暗中“开枪”后，根据市场的“回声”（即早期用户的付费和反馈）来不断校准目标，最终才清晰化的“涌现”策略。
+              </p>
+            </div>
+
+            <div
+              id="note-5"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                商业验证：用付费验证模式，而非功能
+              </h4>
+              <p class="mt-2 text-sm">
+                这是我们共创的另一个核心洞见。在AI时代，我们应该利用AI的“加速度”，以极低的成本，快速验证一个“商业模式”的可行性，而不是用来更快地制造一个功能精致但无人问津的“玩具”。flomo早期粗糙的收费验证，完美地印证了这一点。
+              </p>
+            </div>
+
+            <div
+              id="note-6"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                增长反思：警惕“功能陷阱”
+              </h4>
+              <p class="mt-2 text-sm">
+                flomo的经历揭示了一个深刻的道理：用户续费，不是因为你提供了多少功能，而是因为你的核心价值对他们依然重要。增长的重心应是强化核心价值，而非盲目扩张。这对于所有订阅制产品都是一个宝贵的警示。
+              </p>
+            </div>
+
+            <div
+              id="note-7"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                终极战略：“慢”本身就是一种壁垒
+              </h4>
+              <p class="mt-2 text-sm">
+                “长坡厚雪”战略的核心是“慢”。这种“慢”并非懒惰，而是一种主动选择。它能自然地过滤掉所有追求“短平快”的热钱和竞争对手，让团队能真正沉下心来，专注于为核心用户创造核心价值。在这个快节奏的时代，有耐心“慢下来”，本身就是一种稀缺且强大的竞争力。
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Scrollytelling Demo. Content by 少楠.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger)
+
+        const annotationCards = document.querySelectorAll('.annotation-card')
+        const annotatedParas = document.querySelectorAll('[data-annotate]')
+
+        annotatedParas.forEach((para) => {
+          const noteId = para.dataset.annotate
+          const targetNote = document.getElementById(noteId)
+
+          if (!targetNote) return
+
+          ScrollTrigger.create({
+            trigger: para,
+            start: 'top 30%',
+            end: 'bottom 30%',
+            onEnter: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            },
+            onEnterBack: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            }
+          })
+        })
+
+        const firstCard = document.querySelector('.annotation-card')
+        if (firstCard) {
+          setTimeout(() => {
+            firstCard.classList.add('active')
+          }, 300)
+        }
+
+        const pillars = gsap.utils.toArray('.strategy-pillar')
+        pillars.forEach((pillar) => {
+          ScrollTrigger.create({
+            trigger: pillar,
+            start: 'top center',
+            end: 'bottom center',
+            toggleClass: 'is-active'
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

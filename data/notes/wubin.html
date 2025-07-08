@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事 | 武彬：投资人的判断机会方法论</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      /* ------------------------------ */
+      /* 1. 全局设计规范 (Global Design System) */
+      /* ------------------------------ */
+      :root {
+        --bg-paper: #f9f6f1; /* 温暖的纸张背景色 */
+        --text-main: #3d3d3d; /* 主要文本，非纯黑，更柔和 */
+        --text-heading: #1a1a1a; /* 标题文本 */
+        --accent-primary: #1e40af; /* 理性、深邃的蓝色 */
+        --accent-secondary: #eaddc7; /* 温暖的米色，用于高亮背景 */
+        --border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: 'Noto Sans SC', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* ------------------------------ */
+      /* 2. 排版 (Typography) */
+      /* ------------------------------ */
+      h1,
+      h2,
+      h3 {
+        font-family: 'Noto Serif SC', serif;
+        color: var(--text-heading);
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* ------------------------------ */
+      /* 3. 组件样式 (Component Styles) */
+      /* ------------------------------ */
+
+      .annotation-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        will-change: opacity, transform;
+      }
+      .annotation-card.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .strategy-pillar {
+        border-left: 4px solid transparent;
+        transition: background-color 0.4s ease, border-left-color 0.4s ease;
+      }
+      .strategy-pillar.is-active {
+        background-color: white;
+        border-left-color: var(--accent-primary);
+      }
+
+      .core-principle {
+        background-color: var(--accent-secondary);
+        font-family: 'Noto Serif SC', serif;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- 返回按钮 -->
+    <a
+      href="index.html"
+      title="返回智慧殿堂"
+      class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300"
+    >
+      <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="py-16 md:py-24 text-center max-w-4xl mx-auto">
+        <p class="text-lg md:text-xl text-gray-600 mb-4">@武彬</p>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+          data-annotate="note-intro"
+        >
+          投资人的判断机会方法论
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600">
+          「极客科技」创始人CEO
+        </p>
+      </header>
+
+      <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <article class="lg:col-span-7">
+          <div class="prose prose-lg max-w-none text-justify">
+            <p data-annotate="note-1" class="text-lg">
+              我们之前也拿了很多投资人的投资，他们在决定投我们的时候的思考逻辑，其实也很适合用于判断一个机会是否值得做。他们通常会问三个问题，我称之为“投资三问”：
+            </p>
+
+            <h2
+              class="text-3xl font-semibold mt-16 mb-8"
+              data-annotate="note-2"
+            >
+              从“投资三问”判断新机会
+            </h2>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-3"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    1. 为什么这个赛道值得做？ (Why this?)
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    这个问题是横向的，看的是最新的行业空间与趋势。是不是风口？赛道足够大吗？例如，我们把赌注放在AI+电商，因为AI是确定性方向，而电商是存量竞争下的新战场。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-4"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    2. 为什么这个赛道是你来做？ (Why you?)
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    很多人看到机会都会冲，但关键是你是否具备做这个赛道的核心优势。不是每一个好机会都是你的机会。例如，我们本身有很强的AI能力和电商基础。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-5"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-map-signs"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    3. 为什么你能做成？ (Why can you?)
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    这个问题强调的是执行路径与落地能力。不是看到机会就能做成，而是你是否已经在设计好每一步行动计划，知道怎么带领团队往前走。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h2
+              class="text-3xl font-semibold mt-16 mb-8"
+              data-annotate="note-6"
+            >
+              普通人的启动资金配置法
+            </h2>
+            <p>
+              对于普通个体来说，如何用10万元本金在一年内实现百万目标？我认为最方便的，是挑战与电商和IP视频相关的创业机会。而资金的配置，是一门艺术。
+            </p>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-7"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    第一步：5%用于投资认知
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    不要把所有钱都压在执行上，认知先行，信息先行。用5000元去参与线下活动、私董会，找人生导师求教，获取一手经验，这是回报率最高的投资。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-8"
+            >
+              <div class="flex items-start gap-6">
+                <div
+                  class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"
+                >
+                  <i class="fa-solid fa-flask-vial"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold !mt-0">
+                    第二步：95%用于分散试错
+                  </h3>
+                  <p class="!mt-2 !mb-0">
+                    钱投入初期，不要All
+                    in。将剩下的9万多块钱，拆分成3-4份，同时测试多个小项目，如视频带货、服务类项目变现等。用这些小项目来提升自己的判断力和执行力。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="core-principle my-12 p-8 text-center rounded-lg shadow-sm"
+              data-annotate="note-9"
+            >
+              <h3
+                class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0"
+              >
+                第三步：选择“好资产+高杠杆”的赛道
+              </h3>
+              <p class="!mt-2 !mb-0">
+                在完成认知投资和分散试错后，最终要将资源聚焦在那些既是“好资产”（有长期价值），又能用“高杠杆”（如AI）来放大的赛道上。例如，我们团队推出的AI短视频带货工具，就是这样一个典型。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hidden lg:block lg:col-span-5">
+          <div id="annotation-panel" class="sticky top-24 space-y-8">
+            <div
+              id="note-intro"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：一套务实的决策系统
+              </h4>
+              <p class="mt-2 text-sm">
+                本文作者“武彬”提供了一套极其清晰、可操作的个人商业决策框架。它不仅适用于创业者，也适用于任何希望在职业生涯中做出高质量决策的个人。
+              </p>
+            </div>
+
+            <div
+              id="note-1"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：从“个人视角”到“投资人视角”的升维
+              </h4>
+              <p class="mt-2 text-sm">
+                这是我们共创的核心洞见。“投资三问”这个框架，是一个强大的工具，它强迫我们跳出“我喜欢做什么”的个人视角，转而用更客观、更理性的“投资人视角”来审视自己的项目，极大地提高了决策质量。
+              </p>
+            </div>
+
+            <div
+              id="note-2"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：从宏观判断到微观启动
+              </h4>
+              <p class="mt-2 text-sm">
+                在用“投资三问”完成宏观的战略判断后，作者接着给出了一个普通人如何用小成本启动的微观战术，形成了一个完整的决策闭环。
+              </p>
+            </div>
+
+            <div
+              id="note-3"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：Why this? (看空间)
+              </h4>
+              <p class="mt-2 text-sm">
+                第一问，是把我们的视线从脚下的路，抬高到天上的星空。它要求我们判断的不是“这个东西我能不能做”，而是“这个东西值不值得做”，避免在一条狭窄、没有未来的路上空耗精力。
+              </p>
+            </div>
+
+            <div
+              id="note-4"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：Why you? (看匹配)
+              </h4>
+              <p class="mt-2 text-sm">
+                第二问，是把我们的视线从外部的机会，拉回到自身的禀赋。它提醒我们，再好的机会，如果与你的核心优势不匹配，那也不是你的机会。这是对“人与事”匹配度的深刻思考。
+              </p>
+            </div>
+
+            <div
+              id="note-5"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：Why can you? (看路径)
+              </h4>
+              <p class="mt-2 text-sm">
+                第三问，是把我们从天马行空的“想法”，拉回到脚踏实地的“计划”。它要求我们把一个宏大的目标，拆解成一步步可执行的、具体的路径。这是检验一个想法是“空想”还是“蓝图”的试金石。
+              </p>
+            </div>
+
+            <div
+              id="note-6"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：“认知投资”是最高杠杆
+              </h4>
+              <p class="mt-2 text-sm">
+                这是我们共创的另一个核心洞见。作者将总资金的5%优先用于“学习和社交”，这个观点极具启发性。这意味着，在投入真金白银去做事之前，最高效的杠杆是先投资自己的“认知”。用5%的钱，去撬动剩下95%的钱的成功率。
+              </p>
+            </div>
+
+            <div
+              id="note-7"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                风险管理：用“分散试错”代替“All in”
+              </h4>
+              <p class="mt-2 text-sm">
+                在初期，用小成本、多项目的方式进行测试，是一个极其优雅的风险管理系统。它在心理上给了创业者极大的安全感，因为任何一个项目的失败都不会是致命的。这让你能以更平和的心态去探索，从而获得更客观的反馈。
+              </p>
+            </div>
+
+            <div
+              id="note-8"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则：知行合一的闭环
+              </h4>
+              <p class="mt-2 text-sm">
+                5%用于学习（知），95%用于实践（行），这是一个完整的“知行合一”的闭环。通过学习获得方向，通过实践获得真知，两者相互促进，螺旋式上升。
+              </p>
+            </div>
+
+            <div
+              id="note-9"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                终极战略：AI是独立开发者的终极杠杆
+              </h4>
+              <p class="mt-2 text-sm">
+                这是我们共创的最终洞见。对于独立开发者而言，在AI时代，最高的杠杆就是AI本身。我们不应该去和内容创作者比拼创意，而应该利用我们的技术优势，为他们提供能放大他们能力的“超级工具”。这，就是最适合我们的、“好资产+高杠杆”的赛道。
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Scrollytelling Demo. Content by 武彬.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger)
+
+        const annotationCards = document.querySelectorAll('.annotation-card')
+        const annotatedParas = document.querySelectorAll('[data-annotate]')
+
+        annotatedParas.forEach((para) => {
+          const noteId = para.dataset.annotate
+          const targetNote = document.getElementById(noteId)
+
+          if (!targetNote) return
+
+          ScrollTrigger.create({
+            trigger: para,
+            start: 'top 30%',
+            end: 'bottom 30%',
+            onEnter: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            },
+            onEnterBack: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            }
+          })
+        })
+
+        const firstCard = document.querySelector('.annotation-card')
+        if (firstCard) {
+          setTimeout(() => {
+            firstCard.classList.add('active')
+          }, 300)
+        }
+
+        const pillars = gsap.utils.toArray('.strategy-pillar')
+        pillars.forEach((pillar) => {
+          ScrollTrigger.create({
+            trigger: pillar,
+            start: 'top center',
+            end: 'bottom center',
+            toggleClass: 'is-active'
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

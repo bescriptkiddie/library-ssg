@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事 | 你赚最多的钱，就是你的人脉商业模式</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      :root {
+        --bg-paper: #f9f6f1;
+        --text-main: #3d3d3d;
+        --text-heading: #1a1a1a;
+        --accent-primary: #581c87; /* 紫色，代表智慧与洞察 */
+        --accent-secondary: #f3e8ff;
+        --border-color: rgba(0, 0, 0, 0.1);
+      }
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: 'Noto Sans SC', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: 'Noto Serif SC', serif;
+        color: var(--text-heading);
+        letter-spacing: 0.05em;
+      }
+      p {
+        line-height: 1.8;
+      }
+      .annotation-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        will-change: opacity, transform;
+      }
+      .annotation-card.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .strategy-pillar {
+        border-left: 4px solid transparent;
+        transition: background-color 0.4s ease, border-left-color 0.4s ease;
+      }
+      .strategy-pillar.is-active {
+        background-color: white;
+        border-left-color: var(--accent-primary);
+      }
+      .core-principle {
+        background-color: var(--accent-secondary);
+        font-family: 'Noto Serif SC', serif;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- 返回按钮 -->
+    <a
+      href="index.html"
+      title="返回智慧殿堂"
+      class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300"
+    >
+      <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <header
+        class="py-16 md:py-24 text-center max-w-4xl mx-auto"
+        data-annotate="note-intro"
+      >
+        <p class="text-lg md:text-xl text-gray-600 mb-4">@闪光少女斯斯</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          你赚最多的钱，就是你的人脉商业模式
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600">
+          一套用于识别个人核心价值的诊断系统
+        </p>
+      </header>
+
+      <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <article class="lg:col-span-7">
+          <div class="prose prose-lg max-w-none text-justify">
+            <p data-annotate="note-1">
+              “过去3年你赚到最多的钱，就是你的生态位，不要回避它。”
+              这是斯斯提出的核心诊断工具。它像一面镜子，帮助我们诚实地审视自己的价值来源，而不是停留在“我以为”的层面。这个工具，将我们从复杂的个人定位问题中解脱出来，提供了一个极其简单有效的判断标准。
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              个人生态位的三层结构
+            </h2>
+            <p data-annotate="note-2">
+              斯斯将个人的人脉商业模式，巧妙地类比为公司的融资轮次，划分出三个层次。这个划分帮助我们清晰地看到，我们从不同圈层获取价值的方式是截然不同的。
+            </p>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-3"
+            >
+              <h3 class="text-xl font-semibold !mt-0">
+                A轮：关键支持者 (Patrons)
+              </h3>
+              <p class="!mt-2 !mb-0">
+                他们是你的“投资人”，可能是真正的基金，也可能是你的父母、导师或前老板。他们提供的是决定性的、一次性的大额支持。斯斯坦言，她自己最大的收入就来自这个层面。
+              </p>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-4"
+            >
+              <h3 class="text-xl font-semibold !mt-0">
+                B端：同行与客户 (Peers)
+              </h3>
+              <p class="!mt-2 !mb-0">
+                他们是你的“客户”，通过广告、项目合作等方式与你进行价值交换。这是大多数IP和专业人士的核心收入来源。斯斯为消费品大厂和医美品牌提供的服务，就属于这个层面。
+              </p>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-5"
+            >
+              <h3 class="text-xl font-semibold !mt-0">
+                C端：粉丝与大众 (Followers)
+              </h3>
+              <p class="!mt-2 !mb-0">
+                他们是你的“用户”，通过购买你的课程、产品等方式为你付费。这是将个人影响力规模化变现的渠道，也是你影响力的基本盘。
+              </p>
+            </div>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              模式选择：访谈号的双刃剑
+            </h2>
+            <p data-annotate="note-6">
+              文章进一步探讨了一种具体的B端变现模式——访谈号。这是一种极具诱惑力，但也极具挑战的模式。它的优势在于可以“借船出海”，通过与大咖绑定，快速突破圈层，用别人的故事成就自己的流量。但其劣势也同样致命：它要求主理人必须能提供对等的价值，并且需要处理与嘉宾之间的“双向交易”，这对个人能力是极大的考验。
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              共创演练：挖掘医美老板的真实需求
+            </h2>
+            <p data-annotate="note-7">
+              在解读斯斯与医美品牌“露白白学”的合作案例时，我们进行了一次共创演练。我们发现，这个案例完美地印证了一个深度洞察工具——“三层需求模型”。它揭示了为什么斯斯的解决方案如此有效。
+            </p>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-8"
+            >
+              <h3 class="text-xl font-semibold !mt-0">
+                第一层：表面需求 (The "What")
+              </h3>
+              <p class="!mt-2 !mb-0">
+                客户明确提出的要求是：“传递品牌价值，售卖产品”。这是一个典型的营销需求，任何广告公司都能接。
+              </p>
+            </div>
+
+            <div
+              class="strategy-pillar p-6 my-8 rounded-lg shadow-sm"
+              data-annotate="note-9"
+            >
+              <h3 class="text-xl font-semibold !mt-0">
+                第二层：真实痛点 (The "Why")
+              </h3>
+              <p class="!mt-2 !mb-0">
+                但我们深入思考，客户为什么有这个需求？因为在一个信任缺失的行业，“用户不信任，获客ROI低”才是她真正的痛点。
+              </p>
+            </div>
+
+            <div
+              class="core-principle my-12 p-8 text-center rounded-lg shadow-sm"
+              data-annotate="note-10"
+            >
+              <h3
+                class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0"
+              >
+                第三层：终极渴望 (The "So What")
+              </h3>
+              <p class="!mt-2 !mb-0">
+                痛点背后，是老板的终极渴望：“为品牌建立信任状，让创始人IP化”。她渴望的不是一次性的销量，而是用户对她个人长期的信任。斯斯设计的“老板访谈+直播”方案，精准地满足了这个深层渴望，从而提供了无法被复制的价值。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hidden lg:block lg:col-span-5">
+          <div id="annotation-panel" class="sticky top-24 space-y-8">
+            <div
+              id="note-intro"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：从“诊断”到“洞察”
+              </h4>
+              <p class="mt-2 text-sm">
+                本文的核心价值在于提供了一个强大的“诊断”工具，帮助我们看清现实。而我们共创的价值，则在于为这个诊断工具，配备了一套“洞察”系统，让我们不仅知其然，更知其所以然。
+              </p>
+            </div>
+            <div
+              id="note-1"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：“诊断”优于“规划”
+              </h4>
+              <p class="mt-2 text-sm">
+                对于个人定位而言，诚实地“诊断”现状，比雄心勃勃地“规划”未来更重要。斯斯的模型，正是这样一个帮助我们回归现实、找到价值根基的工具。
+              </p>
+            </div>
+            <div
+              id="note-2"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：识别你的“个人A轮”
+              </h4>
+              <p class="mt-2 text-sm">
+                这个框架最有启发性的一点，是让我们识别出那些“隐性”的A轮投资者——那些给予我们无条件支持和关键机会的人。珍视并回报他们，是个人发展的关键。
+              </p>
+            </div>
+            <div
+              id="note-3"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则：找到你的高价值区
+              </h4>
+              <p class="mt-2 text-sm">
+                你的“A轮”和“B端”收入，通常代表了市场对你“稀缺能力”的定价。分析这些高价值收入的来源，可以帮助你找到自己最应该持续投入和发展的领域。
+              </p>
+            </div>
+            <div
+              id="note-4"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                风险管理：警惕B端服务的陷阱
+              </h4>
+              <p class="mt-2 text-sm">
+                B端服务虽然价值高，但也容易陷入“为客户打工”的陷阱，从而失去发展自有IP和C端产品的机会。清晰地划分时间与精力，是平衡B端和C端的关键。
+              </p>
+            </div>
+            <div
+              id="note-5"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则：C端是影响力的放大器
+              </h4>
+              <p class="mt-2 text-sm">
+                即使C端收入不是最高的，它也构成了你影响力的基本盘。一个强大的C端品牌，会反过来提升你在A轮和B端谈判时的议价能力。
+              </p>
+            </div>
+            <div
+              id="note-6"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：访谈号的本质是“杠杆”
+              </h4>
+              <p class="mt-2 text-sm">
+                访谈号的本质是“借力”，是一种高杠杆策略。但所有杠杆都有风险。它的风险在于，你是否能持续提供让“被借方”满意的价值，以及这种“借来的光环”能否有效转化为“自己的资产”。
+              </p>
+            </div>
+            <div
+              id="note-7"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                共创洞察：将洞察转化为工具
+              </h4>
+              <p class="mt-2 text-sm">
+                我们共创的核心，是将斯斯案例中蕴含的智慧，提炼成一个可复用的“三层需求模型”。这个过程本身，就是一次从“感性认知”到“理性工具”的升维。
+              </p>
+            </div>
+            <div
+              id="note-8"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                模型应用：表面需求 (The "What")
+              </h4>
+              <p class="mt-2 text-sm">
+                如果仅仅满足客户的表面需求，我们提供的服务将极易被同质化，陷入低价竞争的红海。因为任何一个执行者都能“做营销”，但很少有人能帮助客户澄清其“终极渴望”。
+              </p>
+            </div>
+            <div
+              id="note-9"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                模型应用：真实痛点 (The "Why")
+              </h4>
+              <p class="mt-2 text-sm">
+                “真实痛点”是连接表面与深层的桥梁。在接收到任何需求时，反复追问“为什么”，直到找到那个最根本的、无法再被追问的动机，是挖掘真实痛点的核心技巧。
+              </p>
+            </div>
+            <div
+              id="note-10"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                终极战略：成为战略伙伴
+              </h4>
+              <p class="mt-2 text-sm">
+                当我们能够帮助客户澄清其“终极渴望”时，我们就不再仅仅是一个“服务提供商”，而是能够与客户共同定义问题、澄清目标的“战略伙伴”。这是一种从“被动执行”到“主动引领”的身份跃迁。
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Scrollytelling Demo. A Co-creation Journey.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger)
+        const annotationCards = document.querySelectorAll('.annotation-card')
+        const annotatedElements = document.querySelectorAll('[data-annotate]')
+
+        annotatedElements.forEach((elem) => {
+          const noteId = elem.dataset.annotate
+          const targetNote = document.getElementById(noteId)
+          if (!targetNote) return
+
+          ScrollTrigger.create({
+            trigger: elem,
+            start: 'top 30%',
+            end: 'bottom 30%',
+            onEnter: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            },
+            onEnterBack: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            }
+          })
+        })
+
+        const firstCard = document.querySelector('.annotation-card')
+        if (firstCard) {
+          setTimeout(() => {
+            firstCard.classList.add('active')
+          }, 300)
+        }
+
+        const pillars = gsap.utils.toArray('.strategy-pillar')
+        pillars.forEach((pillar) => {
+          ScrollTrigger.create({
+            trigger: pillar,
+            start: 'top center',
+            end: 'bottom center',
+            toggleClass: 'is-active'
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

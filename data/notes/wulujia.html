@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动叙事 | 吴鲁加：我如何穿越焦虑，靠长期主义走出创业低谷</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* ------------------------------ */
+        /* 1. 全局设计规范 (Global Design System) */
+        /* ------------------------------ */
+        :root {
+            --bg-paper: #f9f6f1; /* 温暖的纸张背景色 */
+            --text-main: #3d3d3d; /* 主要文本，非纯黑，更柔和 */
+            --text-heading: #1a1a1a; /* 标题文本 */
+            --accent-primary: #57534e; /* 沉稳、安静的石灰色 */
+            --accent-secondary: #eaddc7; /* 温暖的米色，用于高亮背景 */
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-paper);
+            color: var(--text-main);
+            font-family: 'Noto Sans SC', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ------------------------------ */
+        /* 2. 排版 (Typography) */
+        /* ------------------------------ */
+        h1, h2, h3 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-heading);
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* ------------------------------ */
+        /* 3. 组件样式 (Component Styles) */
+        /* ------------------------------ */
+
+        .annotation-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
+        }
+        .annotation-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .strategy-pillar {
+            border-left: 4px solid transparent;
+            transition: background-color 0.4s ease, border-left-color 0.4s ease;
+        }
+        .strategy-pillar.is-active {
+            background-color: white;
+            border-left-color: var(--accent-primary);
+        }
+
+        .core-principle {
+            background-color: var(--accent-secondary);
+            font-family: 'Noto Serif SC', serif;
+        }
+
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- 返回按钮 -->
+    <a href="index.html" title="返回智慧殿堂" class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300">
+        <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <header class="py-16 md:py-24 text-center max-w-4xl mx-auto">
+            <p class="text-lg md:text-xl text-gray-600 mb-4">@吴鲁加</p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight" data-annotate="note-intro">我如何穿越焦虑，靠长期主义走出创业低谷</h1>
+            <p class="mt-6 text-lg md:text-xl text-gray-600">「知识星球」创始人</p>
+        </header>
+
+        <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+
+            <article class="lg:col-span-7">
+                <div class="prose prose-lg max-w-none text-justify">
+                    <p data-annotate="note-1" class="text-lg">最近，或许是看多了裁员、欠薪、倒闭的新闻，内心有些忧心忡忡。想做点啥，又不知道能做点啥。心急其实来自于这样的矛盾：看到了纷扰的环境，恨不得动，但心急其实还是动了。所以，我需要稳定情绪。Mentor曾对我说：“不着急，天地本宽，岁月本长。”</p>
+
+                    <h2 class="text-3xl font-semibold mt-16 mb-8" data-annotate="note-2">穿越焦虑的两个“咒语”</h2>
+                    <p>面对不确定性，我找到了两个能帮助我稳定内核的工具。</p>
+
+                    <div class="strategy-pillar p-6 my-8 rounded-lg shadow-sm" data-annotate="note-3">
+                        <div class="flex items-start gap-6">
+                            <div class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"><i class="fa-solid fa-mountain-sun"></i></div>
+                            <div>
+                                <h3 class="text-xl font-semibold !mt-0">咒语一：“天地本宽，岁月本长”</h3>
+                                <p class="!mt-2 !mb-0">这句话出自曾国藩，原文是：岁月本长，而忙者自促；天地本宽，而鄙者自隘。它提醒我，拉长时间和空间尺度看，眼前的困难和焦虑大多微不足道，从而获得内心的平静和定力。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-pillar p-6 my-8 rounded-lg shadow-sm" data-annotate="note-4">
+                        <div class="flex items-start gap-6">
+                            <div class="text-3xl text-center w-12 pt-1 text-[--accent-primary]"><i class="fa-solid fa-circle-question"></i></div>
+                            <div>
+                                <h3 class="text-xl font-semibold !mt-0">咒语二：“焦虑有用吗？(Would it help?)”</h3>
+                                <p class="!mt-2 !mb-0">2017年，合伙人曾问我：“焦虑有用吗？如果有用，咱们一起焦虑。”这句话如当头棒喝。后来在电影《闻香识女人》中也看到类似情节。这个简单的反问，是一个强大的“断路器”，能快速切断无谓的情绪内耗，让精力回归到解决实际问题上。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="core-principle my-12 p-8 text-center rounded-lg shadow-sm" data-annotate="note-5">
+                        <h3 class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0">机会判断的底层逻辑：我更看重“长期能走下去”</h3>
+                         <p class="!mt-2 !mb-0">我不是反应特别敏捷的人，所以不喜欢做太“短线”的事。在选择产品时，我通常会问自己两个问题：1. 产品能做出什么不一样？我不想只是抄，也不想仅仅做“一个又一个”某某。2. 我愿不愿意长期做，以及它能不能有长期的迭代进化空间？</p>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="hidden lg:block lg:col-span-5">
+                <div id="annotation-panel" class="sticky top-24 space-y-8">
+
+                    <div id="note-intro" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                        <h4 class="font-bold text-lg text-[--accent-primary] font-sans">编辑手记：从“术”到“道”</h4>
+                        <p class="mt-2 text-sm">这是我们共创的第一个核心洞见。如果说我们之前讨论的文章是关于商业模式、增长策略这些“外功”（术），那么这篇文章则是一部关于如何修炼“内功”（道）的心法。</p>
+                    </div>
+
+                    <div id="note-1" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                        <h4 class="font-bold text-lg text-[--accent-primary] font-sans">核心观点：情绪稳定是终极护城河</h4>
+                        <p class="mt-2 text-sm">本文揭示了一个深刻的道理：创业者的情绪稳定，才是公司最核心的资产和最坚固的护城河。在外部环境剧烈变化时，一个稳定的内核，能让你做出更理性的决策，穿越周期。</p>
+                    </div>
+
+                    <div id="note-2" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                         <h4 class="font-bold text-lg text-[--accent-primary] font-sans">策略分析：“天地本宽”是为了更好地“寻找”</h4>
+                        <p class="mt-2 text-sm">这是我们共创的第二个核心洞见。“天地本宽，岁月本长”给予我们的内心平静，其目的不是为了原地不动地等待，而是为了给我们提供一个稳定的精神内核，去进行最重要、也最艰难的探索：**找到那件值得我用“长期主义”去投入的事**。</p>
+                    </div>
+
+                    <div id="note-3" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                        <h4 class="font-bold text-lg text-[--accent-primary] font-sans">行动原则：“长期主义”是“匹配度”而非“赛道”</h4>
+                        <p class="mt-2 text-sm">长期主义的本质，不是选择一个“好”赛道然后坚持，而是**“你”和“你要做的事”之间的高度匹配**。只有当你做的这件事能让你“愿意长期探索”，能容纳你的“笨拙”，能让你享受过程，这种坚持才是可持续的，才叫真正的长期主义。</p>
+                    </div>
+
+                    <div id="note-4" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                        <h4 class="font-bold text-lg text-[--accent-primary] font-sans">决策算法：“Would it help?”</h4>
+                        <p class="mt-2 text-sm">这个简单的反问，是一个强大的决策过滤器。它强迫我们将精力从“担忧问题”转向“解决问题”。在商业决策中，我们可以把它应用到各种场景：开这个会，Would it help? 做这个功能，Would it help? 它能帮我们砍掉大量不产生实际价值的“伪工作”。</p>
+                    </div>
+
+                    <div id="note-5" class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md">
+                        <h4 class="font-bold text-lg text-[--accent-primary] font-sans">编辑总结：内外双修，方能行稳致远</h4>
+                        <p class="mt-2 text-sm">最终，这篇文章告诉我们，成功的创业不仅需要向外探索商业模式（术），更需要向内修炼精神内核（道）。只有当你的内心足够“宽”，你的事业之路才能足够“长”。</p>
+                    </div>
+
+                </div>
+            </aside>
+
+        </main>
+
+        <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+            <p class="text-sm text-gray-500">&copy; 2024 Scrollytelling Demo. Content by 吴鲁加.</p>
+        </footer>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const annotationCards = document.querySelectorAll('.annotation-card');
+        const annotatedParas = document.querySelectorAll('[data-annotate]');
+
+        annotatedParas.forEach(para => {
+            const noteId = para.dataset.annotate;
+            const targetNote = document.getElementById(noteId);
+
+            if (!targetNote) return;
+
+            ScrollTrigger.create({
+                trigger: para,
+                start: "top 30%",
+                end: "bottom 30%",
+                onEnter: () => {
+                    annotationCards.forEach(card => card.classList.remove('active'));
+                    targetNote.classList.add('active');
+                },
+                onEnterBack: () => {
+                    annotationCards.forEach(card => card.classList.remove('active'));
+                    targetNote.classList.add('active');
+                },
+            });
+        });
+
+        const firstCard = document.querySelector('.annotation-card');
+        if (firstCard) {
+            setTimeout(() => {
+                firstCard.classList.add('active');
+            }, 300);
+        }
+
+        const pillars = gsap.utils.toArray('.strategy-pillar');
+        pillars.forEach(pillar => {
+            ScrollTrigger.create({
+                trigger: pillar,
+                start: 'top center',
+                end: 'bottom center',
+                toggleClass: 'is-active'
+            });
+        });
+
+    });
+    </script>
+
+</body>
+</html>

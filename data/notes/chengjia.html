@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事 | 成甲的五个“非典型赚钱观”</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      :root {
+        --bg-paper: #f9f6f1;
+        --text-main: #3d3d3d;
+        --text-heading: #1a1a1a;
+        --accent-primary: #15803d; /* 绿色，代表农耕与生机 */
+        --accent-secondary: #f0fdf4;
+        --border-color: rgba(0, 0, 0, 0.1);
+      }
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: 'Noto Sans SC', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: 'Noto Serif SC', serif;
+        color: var(--text-heading);
+        letter-spacing: 0.05em;
+      }
+      p {
+        line-height: 1.8;
+      }
+      .annotation-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        will-change: opacity, transform;
+      }
+      .annotation-card.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .strategy-pillar {
+        border-left: 4px solid transparent;
+        transition: background-color 0.4s ease, border-left-color 0.4s ease;
+      }
+      .strategy-pillar.is-active {
+        background-color: white;
+        border-left-color: var(--accent-primary);
+      }
+      .core-principle {
+        background-color: var(--accent-secondary);
+        font-family: 'Noto Serif SC', serif;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- 返回按钮 -->
+    <a
+      href="index.html"
+      title="返回智慧殿堂"
+      class="fixed top-6 right-6 z-50 flex items-center justify-center h-12 w-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300"
+    >
+      <i class="fa-solid fa-university text-xl text-[--accent-primary]"></i>
+    </a>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <header
+        class="py-16 md:py-24 text-center max-w-4xl mx-auto"
+        data-annotate="note-intro"
+      >
+        <p class="text-lg md:text-xl text-gray-600 mb-4">@成甲</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          用喜欢的事打造复利系统
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600">
+          成甲的五个“非典型赚钱观”
+        </p>
+      </header>
+
+      <main class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <article class="lg:col-span-7">
+          <div class="prose prose-lg max-w-none text-justify">
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              观一：不追求高峰，追求稳定系统
+            </h2>
+            <p data-annotate="note-1">
+              成甲的第一个核心观点是：不关注单笔交易的巨大金额，而是致力于构建一个能持续创造价值的“复利系统”。因为单次成功往往依赖运气，而一个健康的系统，才能带来持久稳定的收益。他将自己本就要做的事——学习和思考，转化为低成本、高价值的产品，如“《穷理查宝典》慢读会”和“复利日知录”社群，完美地诠释了这一理念。
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              观二：不抓机会，专注系统内精进
+            </h2>
+            <p data-annotate="note-2">
+              面对层出不穷的新机会，成甲选择“不抓”，因为他认为预判未来太难。他更愿意将全部精力投入到自己已经建立的、真正喜欢的系统内。通过每天进步一点点——提升知识、理解用户、改进产品——来持续加固自己的护城河。对他而言，这才是最高效、最确定的“赚钱机会”。
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              观三：不求十倍，看重1%的复利
+            </h2>
+            <p data-annotate="note-3">
+              “每天改进1%”是成甲复利系统的核心引擎。他算过一笔账：每天进步1%，一年后将获得37.8倍的价值提升，这远超追求10倍的短期暴利。他坚信，长期来看，个人收益会与创造的价值正相关。因此，他宁愿花时间打磨系统，也不参与“一年赚10倍”的高风险游戏。
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-16 mb-8">
+              观四：不靠激情，靠系统预防困境
+            </h2>
+            <p data-annotate="note-4">
+              成甲将创业视为生活的一部分，而做喜欢的事是其核心。他应对风险的方式，不是靠激情或心态硬抗，而是深受芒格影响——“如果我知道自己会死在哪里，我就不去那里。”
+              他会花大量时间做提前准备，从系统层面预防自己陷入绝境。因为做的是自己热爱的事，所以过程充满乐趣，即使收益起伏，也只是生活的小插曲。
+            </p>
+
+            <div
+              class="core-principle my-12 p-8 text-center rounded-lg shadow-sm"
+              data-annotate="note-5"
+            >
+              <h3
+                class="text-2xl md:text-3xl text-center !text-[--text-heading] !mt-0"
+              >
+                观五：真诚做喜欢的事，才是底气
+              </h3>
+              <p class="!mt-2 !mb-0">
+                这是贯穿所有原则的底层信念。回顾过去，成甲认为最应该做的是“更勇敢、更诚实地做你内心喜欢和相信的事情”。这份源于内心的热爱，是构建复利系统、抵御风险、穿越周期的终极底气所在。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hidden lg:block lg:col-span-5">
+          <div id="annotation-panel" class="sticky top-24 space-y-8">
+            <div
+              id="note-intro"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                编辑手记：两种世界观的选择
+              </h4>
+              <p class="mt-2 text-sm">
+                成甲的文章，本质上是在阐述两种赚钱世界观的对决：“狩猎模式”追求机会与高峰，而“农耕模式”经营系统与复利。成甲坚定地选择了后者，为我们展示了一条更具确定性的价值创造之路。
+              </p>
+            </div>
+            <div
+              id="note-1"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                共创洞察：“狩猎-农耕混合模式”
+              </h4>
+              <p class="mt-2 text-sm">
+                在讨论中，我们直面了一个现实困境：“向往农耕，但身处狩猎”。为此，我们共同构建了“狩猎-农耕混合模式”：用80%的精力去“狩猎”，解决生存问题；但必须保留20%的精力来“农耕”，为未来播种。核心是，用狩猎的收获滋养农耕的土地。
+              </p>
+            </div>
+            <div
+              id="note-2"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                策略分析：重新定义“成本”
+              </h4>
+              <p class="mt-2 text-sm">
+                “将本来就要做的事，转化为产品”，这个观点极具启发性。它让我们意识到，对于知识工作者，学习、思考这些看似是“时间成本”的投入，完全可以被设计成“产品”本身，从而极大地降低了创业的门槛与风险。
+              </p>
+            </div>
+            <div
+              id="note-3"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                核心观点：复利的威力
+              </h4>
+              <p class="mt-2 text-sm">
+                37.8倍的价值增长，生动地展示了复利的力量。这个世界往往会高估一天的努力，却严重低估一年的坚持。选择做难而正确的事，并持续投入，时间会给予最好的回报。
+              </p>
+            </div>
+            <div
+              id="note-4"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                行动原则：构建“反脆弱”系统
+              </h4>
+              <p class="mt-2 text-sm">
+                不依赖外部机会，不惧怕内部波动，并且能从时间的流逝中获益——成甲的系统，是一个完美的个人“反脆弱”实践。它追求的不是“强大”，而是“不死”，并能在混乱中变得更强。
+              </p>
+            </div>
+            <div
+              id="note-5"
+              class="annotation-card p-6 bg-white rounded-lg border border-[--border-color] shadow-md"
+            >
+              <h4 class="font-bold text-lg text-[--accent-primary] font-sans">
+                终极战略：内在动机是终极护城河
+              </h4>
+              <p class="mt-2 text-sm">
+                当你的事业就是你最热爱的事情时，你将拥有一个任何竞争对手都无法战胜的优势：你比他们更能坚持，更能从工作中获得乐趣。这份源自内心的“喜欢”，是最高、最宽的护城河。
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="text-center py-12 mt-16 border-t border-[--border-color]">
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Scrollytelling Demo. A Co-creation Journey.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger)
+        const annotationCards = document.querySelectorAll('.annotation-card')
+        const annotatedElements = document.querySelectorAll('[data-annotate]')
+
+        annotatedElements.forEach((elem) => {
+          const noteId = elem.dataset.annotate
+          const targetNote = document.getElementById(noteId)
+          if (!targetNote) return
+
+          ScrollTrigger.create({
+            trigger: elem,
+            start: 'top 30%',
+            end: 'bottom 30%',
+            onEnter: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            },
+            onEnterBack: () => {
+              annotationCards.forEach((card) => card.classList.remove('active'))
+              targetNote.classList.add('active')
+            }
+          })
+        })
+
+        const firstCard = document.querySelector('.annotation-card')
+        if (firstCard) {
+          setTimeout(() => {
+            firstCard.classList.add('active')
+          }, 300)
+        }
+
+        const pillars = gsap.utils.toArray('.strategy-pillar')
+        pillars.forEach((pillar) => {
+          ScrollTrigger.create({
+            trigger: pillar,
+            start: 'top center',
+            end: 'bottom center',
+            toggleClass: 'is-active'
+          })
+        })
+      })
+    </script>
+  </body>
+</html>
